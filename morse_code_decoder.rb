@@ -41,10 +41,14 @@ def decode_morse(morse_code)
 
   morse_code = morse_code.split('   ')
   decoded = ''
-  morse_code.each do |word|
+  morse_code.each_with_index do |word, index|
     word = word.split(' ')
     word = word.map { |chr| morse_dict.key(chr) }.join.upcase
-    decoded << word + ' '
+    if index == 0
+      decoded << word
+    else
+      decoded << ' ' + word
+    end
   end
   decoded
 end
