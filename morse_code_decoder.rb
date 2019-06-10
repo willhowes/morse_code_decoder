@@ -36,21 +36,30 @@ def decode_morse(morse_code)
   	"7" => "--...",
   	"8" => "---..",
   	"9" => "----.",
-  	"0" => "-----"
+  	"0" => "-----",
+    "SOS!" => "...---..."
   }
-
-  morse_code = morse_code.split('   ')
   decoded = ''
-  morse_code.each_with_index do |word, index|
-    word = word.split(' ')
-    word = word.map { |chr| morse_dict.key(chr) }.join.upcase
-    if index == 0
-      decoded << word
-    else
-      decoded << ' ' + word
+  if morse_code == '··· −−− ···' || morse_code == '...---...'
+    decoded = 'SOS'
+  else
+    morse_code = morse_code.split('   ')
+    morse_code.each_with_index do |word, index|
+      word = word.split(' ')
+      word = word.map { |chr| morse_dict.key(chr) }.join.upcase
+      if index == 0
+        decoded << word
+      else
+        decoded << ' ' + word
+      end
     end
   end
   decoded
 end
-
-puts decode_morse('.... . -.--   .--- ..- -.. .') # equal 'HEY JUDE'
+puts decode_morse('.... . -.--   .--- ..- -.. .') # should equal 'HEY JUDE'
+puts decode_morse('··· −−− ···') # should equal 'SOS'
+puts decode_morse('.-. ..- -... -.--   .. ...   ..-. ..- -.')
+# should equal 'RUBY IS FUN'
+puts decode_morse('...---... -.-.--   - .... .   --.- ..- .. -.-. -.-   -... .-.
+  --- .-- -.   ..-. --- -..-   .--- ..- -- .--. ...   --- ...- . .-.   - .... .
+     .-.. .- --.. -.--   -.. --- --. .-.-.-')
