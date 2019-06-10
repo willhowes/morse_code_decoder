@@ -37,7 +37,8 @@ def decode_morse(morse_code)
   	"8" => "---..",
   	"9" => "----.",
   	"0" => "-----",
-    "SOS!" => "...---..."
+    "SOS!" => "...---...",
+    "." => ".-.-.-"
   }
   decoded = ''
   if morse_code == '··· −−− ···' || morse_code == '...---...'
@@ -47,14 +48,10 @@ def decode_morse(morse_code)
     morse_code.each_with_index do |word, index|
       word = word.split(' ')
       word = word.map { |chr| morse_dict.key(chr) }.join.upcase
-      if index == 0
-        decoded << word
-      else
-        decoded << ' ' + word
-      end
+      decoded << ' ' + word
     end
   end
-  decoded
+  decoded.strip
 end
 puts decode_morse('.... . -.--   .--- ..- -.. .') # should equal 'HEY JUDE'
 puts decode_morse('··· −−− ···') # should equal 'SOS'
