@@ -1,4 +1,4 @@
-def decodeMorse(morseCode)
+def decode_morse(morse_code)
   morse_dict = {
   	"a" => ".-",
   	"b" => "-...",
@@ -39,15 +39,14 @@ def decodeMorse(morseCode)
   	"0" => "-----"
   }
 
-  morseCode = morseCode.split("   ")
-  decoded = ""
-  morseCode.each do |word|
-    word = word.split(" ")
-    word = word.map { |chr| morse_dict.key(chr)  }.join.upcase
-    decoded << word + " "
+  morse_code = morse_code.split('   ')
+  decoded = ''
+  morse_code.each do |word|
+    word = word.split(' ')
+    word = word.map { |chr| morse_dict.key(chr) }.join.upcase
+    decoded << word + ' '
   end
-  puts decoded
+  decoded
 end
 
-
-decodeMorse('.... . -.--   .--- ..- -.. .') # equal 'HEY JUDE'
+puts decode_morse('.... . -.--   .--- ..- -.. .') # equal 'HEY JUDE'
